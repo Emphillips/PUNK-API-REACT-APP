@@ -1,59 +1,61 @@
 import React, { Component } from 'react';
 import './App.css';
-import { render } from '@testing-library/react';
+
+
+// class LikeBrew extends React.Component {
+//   constructor(props) {
+//     super(props);
+//     this.state = {
+//       likes: this.props.likes,
+//     };
+//   }
+//   handleLike = () => {
+//     this.setState(prevState => ({
+//       likes: prevState.likes + 1,
+//     }));
+//   }
+// }
 
 
 class App extends Component {
   constructor(props) {
-    super(props);
-    this.state = {
-      beers:[],
-    };
-  }
-
-
-componentDidMount() {
-  fetch('https://api.punkapi.com/v2/beers')
-  .then(results => {
-    return results.json();
-
-  }).then(data => {
-    let beerList = data.results.map(() => {
-      return(
-        <div>
-        </div>
-      )
-    })
+  super(props)
   
 
-    render() {
+  this.state  = {
+    posts: [],
+    }
+  }
+// fetching data from api url
+componentDidMount() {
+  fetch('https://api.punkapi.com/v2/beers')
+  .then(res => res.json())
+  .then(data => this.setState({ posts: data }))
+
+}
+
+render() {
+    return (
       <div>
-        { this.state.beers.map( beer => (
-          <BeerCard beerInfo={beer} />
-        ))}
+          {/* <div>
+          <button className = {LikeBrew(onClick={this.handleLike}>Beer Me!</onClick={this.handleLike}>
+        )}>
+        </div> */}
+
+
+        {this.state.posts.map((post) => {
+          //console.log(post); - Confirm Beer list is showing
+          return <div key={post.id}>
+            <h2>{post.name}</h2>
+              <p>{post.tagline}</p>
+            </div>
+         })}
       </div>
+        )
+      }
     }
 
-  }
-      this.setState({beers: beers});
-      console.log("state", this.state.beers)
     
-    )
-  }
-
-  button onClick=
-
-// render() {
-//   return (
-//     <div className="container2">
-//       <div className="container1">
-//       </div>
-//     </div>
-//   )
-// }
-
-
-
 
 
 
